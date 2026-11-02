@@ -19,8 +19,8 @@
 }
 
 .category-card:hover {
-  background-color: #9dc08b;
-  border-color: #609966;
+  background-color: #dd9f9f;
+  border-color: #deacac;
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(96, 153, 102, 0.3);
 }
@@ -30,7 +30,7 @@
 }
 
 .category-icon {
-  color: #609966;
+  color: #b93636;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,7 @@
 
 .category-label {
   text-align: center;
-  color: #40513b;
+  color: #b93636;
   font-size: clamp(0.9rem, 2cqi, 1.1rem);
   font-weight: 500;
   margin: 0;
