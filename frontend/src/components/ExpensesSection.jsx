@@ -1,0 +1,30 @@
+import CategoryCard from './CategoryCard';
+import { GiShoppingCart, GiReceiveMoney, GiTakeMyMoney, GiPartyPopper } from 'react-icons/gi';
+import '../styles/ExpensesSection.css';
+
+const ExpensesSection = () => {
+  const expenseCategories = [
+    { id: 1, icon: GiReceiveMoney, label: 'Bills' },
+    { id: 2, icon: GiShoppingCart, label: 'Groceries' },
+    { id: 3, icon: GiTakeMyMoney, label: 'Subscriptions' },
+    { id: 4, icon: GiPartyPopper, label: 'Entertainment' }
+  ];
+
+  const handleCategoryClick = (category) => {
+    console.log('Expense category clicked:', category.label);
+  };
+
+  return (
+    <section className="section">
+      <h2 className="section-title">My Expenses</h2>
+      <p className="section-description">Track and manage your expenses by category</p>
+      <div className="categories-grid">
+        {expenseCategories.map((category) => (
+          <CategoryCard key={category.id} icon={category.icon} label={category.label} onClick={() => handleCategoryClick(category)} />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default ExpensesSection;

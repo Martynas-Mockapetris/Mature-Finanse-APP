@@ -1,3 +1,5 @@
+import '../styles/CategoryCard.css';
+
 const CategoryCard = ({ icon: Icon, label, onClick }) => {
   return (
     <button className="category-card" onClick={onClick}>

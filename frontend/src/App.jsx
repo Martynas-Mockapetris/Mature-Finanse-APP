@@ -1,3 +1,4 @@
+import ExpensesSection from './components/ExpensesSection';
 import './App.css';
 
 const App = () => {
@@ -8,7 +9,10 @@ const App = () => {
       </header>
       <div className="app-container">
         {/* Main content area */}
-        <div className="app-content">{/* Components */}</div>
+        <div className="app-content">
+          {/* Components */}
+          <ExpensesSection />
+        </div>
       </div>
     </div>
   );
