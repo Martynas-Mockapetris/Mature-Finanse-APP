@@ -1,0 +1,47 @@
+/* Full screen bg */
+.app-main {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #edf1d6;
+  background: radial-gradient(60% 120% at 50% 50%, rgba(157, 192, 139, 0) 0%, rgba(96, 153, 102, 0.1) 100%), linear-gradient(180deg, #edf1d6 0%, #edf1d6 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #40513b;
+  letter-spacing: 1px;
+}
+
+/* APP*/
+.app-container {
+  width: 100%;
+  max-width: 1500px;
+  background-color: #40513b;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  color: #edf1d6;
+}

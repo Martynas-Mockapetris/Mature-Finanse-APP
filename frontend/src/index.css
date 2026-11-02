@@ -8,10 +8,21 @@
 
 body {
   font-family: 'Dosis', sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #edf1d6;
+  color: #40513b;
+  line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Comfortaa', sans-serif;
+  color: #40513b;
+}
+
+button {
+  font-family: 'Dosis', sans-serif;
 }
