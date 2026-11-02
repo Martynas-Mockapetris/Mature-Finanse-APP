@@ -5,13 +5,13 @@
 .section-title {
   font-size: 1.6rem;
   font-weight: 600;
-  color: #edf1d6;
+  color: var(--background-color);
   letter-spacing: 0.5px;
 }
 
 .section-description {
   font-size: 1.2rem;
-  color: #cfd8dc;
+  color: var(--background-color);
   margin-bottom: 2rem;
 }
 

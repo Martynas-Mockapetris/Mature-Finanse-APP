@@ -7,22 +7,22 @@
   width: 10rem;
   gap: 1rem;
   padding: 1.5rem 1rem;
-  background-color: #edf1d6;
-  border: 2px solid #9dc08b;
+  background-color: var(--background-color);
+  border: 2px solid var(--secondary-red-color);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Comfortaa', sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #40513b;
+  color: var(--text-color);
 }
 
 .category-card:hover {
-  background-color: #dd9f9f;
-  border-color: #deacac;
+  background-color: var(--secondary-red-color);
+  border-color: var(--accent-color);
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(96, 153, 102, 0.3);
+  box-shadow: 0 8px 16px rgba(221, 159, 159, 0.3);
 }
 
 .category-card:active {
@@ -30,7 +30,7 @@
 }
 
 .category-icon {
-  color: #b93636;
+  color: var(--red-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,7 @@
 
 .category-label {
   text-align: center;
-  color: #b93636;
+  color: var(--red-color);
   font-size: clamp(0.9rem, 2cqi, 1.1rem);
   font-weight: 500;
   margin: 0;
