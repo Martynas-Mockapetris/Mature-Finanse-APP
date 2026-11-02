@@ -1,6 +1,7 @@
 import './App.css';
 import ExpensesSection from './components/ExpensesSection';
 import IncomeSection from './components/IncomeSection';
+import CreateNewCategory from './components/CreateNewTab';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           {/* Components */}
           <IncomeSection className="income-section" />
           <ExpensesSection className="expenses-section" />
+          <CreateNewCategory />
         </div>
       </div>
     </div>
