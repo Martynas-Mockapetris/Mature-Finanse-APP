@@ -1,5 +1,6 @@
-import ExpensesSection from './components/ExpensesSection';
 import './App.css';
+import ExpensesSection from './components/ExpensesSection';
+import IncomeSection from './components/IncomeSection';
 
 const App = () => {
   return (
@@ -11,7 +12,8 @@ const App = () => {
         {/* Main content area */}
         <div className="app-content">
           {/* Components */}
-          <ExpensesSection />
+          <IncomeSection className="income-section" />
+          <ExpensesSection className="expenses-section" />
         </div>
       </div>
     </div>

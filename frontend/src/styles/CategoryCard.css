@@ -8,21 +8,16 @@
   gap: 1rem;
   padding: 1.5rem 1rem;
   background-color: var(--background-color);
-  border: 2px solid var(--secondary-red-color);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Comfortaa', sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-color);
 }
 
 .category-card:hover {
-  background-color: var(--secondary-red-color);
-  border-color: var(--accent-color);
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(221, 159, 159, 0.3);
 }
 
 .category-card:active {
@@ -30,7 +25,6 @@
 }
 
 .category-icon {
-  color: var(--red-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,8 +33,43 @@
 
 .category-label {
   text-align: center;
-  color: var(--red-color);
   font-size: clamp(0.9rem, 2cqi, 1.1rem);
   font-weight: 500;
   margin: 0;
+}
+
+/* Expense variant - Red accent */
+.category-card--expense {
+  border: 3px solid var(--red-color);
+}
+
+.category-card--expense:hover {
+  background-color: var(--secondary-red-color);
+  box-shadow: 0 8px 16px rgba(221, 159, 159, 0.15);
+}
+
+.category-card--expense .category-icon {
+  color: var(--red-color);
+}
+
+.category-card--expense .category-label {
+  color: var(--red-color);
+}
+
+/* Income variant - Green accent */
+.category-card--income {
+  border: 3px solid var(--green-color);
+}
+
+.category-card--income:hover {
+  background-color: var(--secondary-green-color);
+  box-shadow: 0 8px 16px rgba(152, 193, 152, 0.15);
+}
+
+.category-card--income .category-icon {
+  color: var(--green-color);
+}
+
+.category-card--income .category-label {
+  color: var(--green-color);
 }
