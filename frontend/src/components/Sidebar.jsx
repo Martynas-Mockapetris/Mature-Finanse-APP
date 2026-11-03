@@ -1,6 +1,6 @@
 import '../styles/Sidebar.css';
 import { GiWolfHowl } from 'react-icons/gi';
-import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown, FaSignOutAlt } from 'react-icons/fa';
 
 const Sidebar = () => {
   const menuItems = [
@@ -9,6 +9,10 @@ const Sidebar = () => {
     { id: 3, icon: FaArrowUp, label: 'Income' },
     { id: 4, icon: FaArrowDown, label: 'Expenses' }
   ];
+
+  const handleLogout = () => {
+    console.log('Logout clicked');
+  };
 
   return (
     <aside className="sidebar">
@@ -26,7 +30,12 @@ const Sidebar = () => {
           </button>
         ))}
       </nav>
-      <div className="sidebar-footer">{/* Logout */}</div>
+      <div className="sidebar-footer">
+        <button className="sidebar-link sidebar-logout" onClick={handleLogout}>
+          <FaSignOutAlt />
+          <span>Logout</span>
+        </button>
+      </div>
     </aside>
   );
 };

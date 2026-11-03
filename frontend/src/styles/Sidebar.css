@@ -70,3 +70,18 @@
   background-color: var(--secondary-green-color);
   color: var(--text-color);
 }
+
+/* Sidebar footer */
+.sidebar-footer {
+  border-top: 2px solid var(--green-color);
+  padding-top: 1rem;
+}
+
+.sidebar-link.sidebar-logout {
+  width: 100%;
+}
+
+.sidebar-logout:hover {
+  background-color: var(--red-color);
+  color: var(--text-color);
+}
