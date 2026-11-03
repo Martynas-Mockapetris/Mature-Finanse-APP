@@ -1,4 +1,5 @@
 import './App.css';
+import Sidebar from './components/Sidebar';
 import ExpensesSection from './components/ExpensesSection';
 import IncomeSection from './components/IncomeSection';
 import CreateNewCategory from './components/CreateNewTab';
@@ -11,6 +12,7 @@ const App = () => {
       </header>
       <div className="app-container">
         {/* Main content area */}
+        <Sidebar />
         <div className="app-content">
           {/* Components */}
           <IncomeSection className="income-section" />

@@ -35,8 +35,9 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 80vh;
+  min-width: 0;
 }
 
 .app-content {
