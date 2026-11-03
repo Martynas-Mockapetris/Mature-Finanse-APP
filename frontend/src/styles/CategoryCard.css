@@ -6,22 +6,20 @@
   flex-shrink: 1;
   width: 10rem;
   gap: 1rem;
-  padding: 1.5rem 1rem;
-  background-color: var(--background-color);
-  border-radius: 12px;
+  padding: 1rem 1rem;
+  background-color: var(--text-color);
+  border-radius: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Comfortaa', sans-serif;
+  transition: all 0.3s ease-in-out;
   font-size: 0.95rem;
-  font-weight: 500;
 }
 
 .category-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-0.25rem);
 }
 
 .category-card:active {
-  transform: translateY(-2px);
+  transform: translateY(0.125rem);
 }
 
 .category-icon {
@@ -34,26 +32,8 @@
 .category-label {
   text-align: center;
   font-size: clamp(0.9rem, 2cqi, 1.1rem);
-  font-weight: 500;
+  font-weight: 600;
   margin: 0;
-}
-
-/* Expense variant - Red accent */
-.category-card--expense {
-  border: 3px solid var(--red-color);
-}
-
-.category-card--expense:hover {
-  background-color: var(--secondary-red-color);
-  box-shadow: 0 8px 16px rgba(221, 159, 159, 0.15);
-}
-
-.category-card--expense .category-icon {
-  color: var(--red-color);
-}
-
-.category-card--expense .category-label {
-  color: var(--red-color);
 }
 
 /* Income variant - Green accent */
@@ -62,14 +42,35 @@
 }
 
 .category-card--income:hover {
-  background-color: var(--secondary-green-color);
-  box-shadow: 0 8px 16px rgba(152, 193, 152, 0.15);
+  box-shadow: 0 8px 10px rgba(42, 131, 95, 0.15);
+  border: 3px solid var(--secondary-green-color);
 }
 
-.category-card--income .category-icon {
-  color: var(--green-color);
-}
-
+.category-card--income .category-icon,
 .category-card--income .category-label {
   color: var(--green-color);
+}
+
+.category-card--income:hover .category-icon,
+.category-card--income:hover .category-label {
+  color: var(--secondary-green-color);
+}
+
+/* Expense variant - Red accent */
+.category-card--expense {
+  border: 3px solid var(--red-color);
+}
+
+.category-card--expense:hover {
+  box-shadow: 0 8px 10px rgba(188, 2, 2, 0.15);
+  border: 3px solid var(--secondary-red-color);
+}
+
+.category-card--expense .category-icon,
+.category-card--expense .category-label {
+  color: var(--red-color);
+}
+.category-card--expense:hover .category-icon,
+.category-card--expense:hover .category-label {
+  color: var(--secondary-red-color);
 }

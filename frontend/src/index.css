@@ -2,14 +2,14 @@
 
 /* Colors */
 :root {
-  --green-color: #609966;
-  --secondary-green-color: #799e7d;
-  --red-color: #b93636;
-  --secondary-red-color: #dd9f9f;
-  --accent-color: #deacac;
-  --background-color: #edf1d6;
-  --secondary-green-color: #9dc08b;
-  --text-color: #40513b;
+  --green-color: #12544f;
+  --secondary-green-color: #2a835f;
+  --red-color: #830000;
+  --secondary-red-color: #bc0202;
+  --background-color: #092328;
+  --secondary-background-color: #f3f4f4;
+  --text-color: #eeeeee;
+  --secondary-text-color: #080616;
 }
 
 * {
@@ -33,8 +33,4 @@ h5,
 h6 {
   font-family: 'Comfortaa', sans-serif;
   color: var(--text-color);
-}
-
-button {
-  font-family: 'Dosis', sans-serif;
 }

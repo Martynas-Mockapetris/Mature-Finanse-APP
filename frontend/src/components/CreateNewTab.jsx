@@ -8,8 +8,8 @@ const CreateNewCategory = () => {
 
   return (
     <section className="section">
-      <h2 className="section-title">Create New</h2>
-      <p className="section-description">Add your own income or expense category</p>
+      <h2 className="section-create-title">Create New</h2>
+      <p className="section-create-description">Add your own income or expense category</p>
       <button className="create-new-btn" onClick={handleCreateNew}>
         <FaPlus />
         <span>New Category</span>

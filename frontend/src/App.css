@@ -20,7 +20,7 @@
 }
 
 .header-title {
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 600;
   color: var(--text-color);
   letter-spacing: 1px;
@@ -30,7 +30,7 @@
 .app-container {
   width: 100%;
   max-width: 1500px;
-  background-color: var(--text-color);
+  background-color: var(--secondary-background-color);
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -42,6 +42,9 @@
 
 .app-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
   padding: 2rem;
   overflow-y: auto;
   color: var(--background-color);

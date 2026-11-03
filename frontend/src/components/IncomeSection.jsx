@@ -16,8 +16,8 @@ const IncomeSection = () => {
 
   return (
     <section className="section">
-      <h2 className="section-title">My Income</h2>
-      <p className="section-description">Track and manage your income by category</p>
+      <h2 className="section-income-title">My Income</h2>
+      <p className="section-income-description">Track and manage your income by category</p>
       <div className="categories-grid">
         {incomeCategories.map((category) => (
           <CategoryCard key={category.id} icon={category.icon} label={category.label} onClick={() => handleCategoryClick(category)} type="income" />
