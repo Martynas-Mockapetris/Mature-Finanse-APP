@@ -1,6 +1,11 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
+import Stats from './pages/Stats';
 import Overview from './pages/Overview';
+import History from './pages/History';
+import Income from './pages/Income';
+import Expenses from './pages/Expenses';
 
 const App = () => {
   return (
@@ -13,7 +18,13 @@ const App = () => {
         <Sidebar />
         <div className="app-content">
           {/* Pages */}
-          <Overview />
+          <Routes>
+            <Route path="/" element={<Overview />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/income" element={<Income />} />
+            <Route path="/expenses" element={<Expenses />} />
+          </Routes>
         </div>
       </div>
     </div>
