@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addCategory } from '../services/storage';
-import '../styles/NewCategory.css';
+import '../styles/FormSection.css';
 
 const NewCategory = () => {
   const [name, setName] = useState('');
