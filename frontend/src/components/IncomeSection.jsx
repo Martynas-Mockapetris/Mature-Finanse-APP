@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import CategoryCard from './CategoryCard';
 import { GiPriceTag } from 'react-icons/gi';
 import { getCategoriesByType } from '../services/storage';
@@ -5,6 +6,7 @@ import { defaultIncomeCategories } from '../data/defaultCategories';
 import '../styles/IncExpSection.css';
 
 const IncomeSection = () => {
+  const navigate = useNavigate();
 
   const savedCategories = getCategoriesByType('income').map((category) => ({
     id: category.id,
@@ -16,6 +18,7 @@ const IncomeSection = () => {
 
   const handleCategoryClick = (category) => {
     console.log('Income category clicked:', category.name);
+    navigate(`/transactions/new/income/${category.id}`);
   };
 
   return (
