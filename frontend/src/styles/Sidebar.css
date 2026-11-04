@@ -64,6 +64,14 @@
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease-in;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.sidebar-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .sidebar-link:hover {

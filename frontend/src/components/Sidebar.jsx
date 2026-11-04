@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import '../styles/Sidebar.css';
 import { GiWolfHowl } from 'react-icons/gi';
 import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown, FaSignOutAlt, FaRegChartBar } from 'react-icons/fa';
 
 const Sidebar = () => {
   const menuItems = [
-    { id: 1, icon: FaRegChartBar, label: 'Overview' },
-    { id: 2, icon: FaArrowUp, label: 'Income' },
-    { id: 3, icon: FaArrowDown, label: 'Expenses' },
-    { id: 4, icon: FaChartPie, label: 'Stats' },
-    { id: 5, icon: FaHistory, label: 'History' }
+    { id: 1, icon: FaChartPie, label: 'Overview', path: '/' },
+    { id: 2, icon: FaRegChartBar, label: 'Stats', path: '/stats' },
+    { id: 3, icon: FaHistory, label: 'History', path: '/history' },
+    { id: 4, icon: FaArrowUp, label: 'Income', path: '/income' },
+    { id: 5, icon: FaArrowDown, label: 'Expenses', path: '/expenses' }
   ];
-
-  const [active, setActive] = useState('Stats');
 
   const handleLogout = () => {
     console.log('Logout clicked');
@@ -28,10 +26,10 @@ const Sidebar = () => {
       </div>
       <nav className="sidebar-nav">
         {menuItems.map((item) => (
-          <button key={item.id} className={`sidebar-link ${active === item.label ? 'sidebar-link--active' : ''}`} onClick={() => setActive(item.label)}>
+          <NavLink key={item.id} to={item.path} end={item.path === '/'} className={({ isActive }) => `sidebar-link ${isActive ? 'sidebar-link--active' : ''}`}>
             <item.icon />
             <span>{item.label}</span>
-          </button>
+          </NavLink>
         ))}
       </nav>
       <div className="sidebar-footer">
