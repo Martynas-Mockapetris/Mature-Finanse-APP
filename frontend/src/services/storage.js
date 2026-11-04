@@ -24,3 +24,20 @@ export const findCategory = (type, id) => {
   const defaults = type === 'income' ? defaultIncomeCategories : defaultExpenseCategories;
   return [...defaults, ...getCategoriesByType(type)].find((category) => category.id === id);
 };
+
+// Get and add transactions to local storage
+const TRANSACTIONS_KEY = 'transactions';
+
+// Get all transactions from local storage
+export const getTransactions = () => {
+  const stored = localStorage.getItem(TRANSACTIONS_KEY);
+  return stored ? JSON.parse(stored) : [];
+};
+
+// Add a new transaction to local storage
+export const addTransaction = ({ type, categoryId, amount, date, note }) => {
+  const transactions = getTransactions();
+  const newTransaction = { id: crypto.randomUUID(), type, categoryId, amount, date, note };
+  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify([...transactions, newTransaction]));
+  return newTransaction;
+};
