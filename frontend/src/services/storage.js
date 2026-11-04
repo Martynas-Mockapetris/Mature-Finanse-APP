@@ -1,3 +1,5 @@
+import { defaultExpenseCategories, defaultIncomeCategories } from '../data/defaultCategories';
+
 const CATEGORIES_KEY = 'categories';
 
 // Get all categories from local storage
@@ -16,3 +18,9 @@ export const addCategory = ({ name, type }) => {
 
 // Get categories filtered by type (expense or income)
 export const getCategoriesByType = (type) => getCategories().filter((category) => category.type === type);
+
+// Find a category by type and ID, including default and user-added categories
+export const findCategory = (type, id) => {
+  const defaults = type === 'income' ? defaultIncomeCategories : defaultExpenseCategories;
+  return [...defaults, ...getCategoriesByType(type)].find((category) => category.id === id);
+};
