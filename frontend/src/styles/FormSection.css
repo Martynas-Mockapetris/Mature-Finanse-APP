@@ -44,8 +44,14 @@
   border-color: var(--green-color);
 }
 
-.form-submit {
+.btn-container {
   margin-top: 3rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.form-submit {
   padding: 0.8rem 1.6rem;
   background-color: var(--secondary-green-color);
   color: var(--text-color);
@@ -55,11 +61,30 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  width: 100%;
 }
 
 .form-submit:hover {
   background-color: transparent;
   color: var(--background-color);
+}
+
+.cancel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-text-color);
+  font-family: 'Comfortaa', sans-serif;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+  border: 3px solid var(--red-color);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+}
+
+.cancel-link:hover {
+  background-color: var(--secondary-red-color);
+  border-color: var(--secondary-red-color);
 }
 
 .back-link {

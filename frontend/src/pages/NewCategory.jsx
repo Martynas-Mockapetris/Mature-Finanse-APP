@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 import { addCategory } from '../services/storage';
 import '../styles/FormSection.css';
 
@@ -20,6 +21,9 @@ const NewCategory = () => {
 
   return (
     <section className="section">
+      <Link to={`/`} className="back-link">
+        <FaArrowLeft /> Back
+      </Link>
       <h2 className="section-title">New Category</h2>
       <p className="section-description">Create your own income or expense category</p>
 
@@ -42,9 +46,11 @@ const NewCategory = () => {
           </select>
         </div>
 
-        <button className="form-submit" type="submit">
-          Create Category
-        </button>
+        <div className="btn-container">
+          <button className="form-submit" type="submit">
+            Create Category
+          </button>
+        </div>
       </form>
     </section>
   );
