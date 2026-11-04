@@ -36,7 +36,6 @@ const NewCategory = () => {
         </div>
 
         <div className="form-field">
-          {' '}
           <label className="form-label" htmlFor="category-type">
             Type
           </label>
