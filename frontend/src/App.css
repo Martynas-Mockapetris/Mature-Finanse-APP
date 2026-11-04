@@ -49,3 +49,11 @@
   overflow-y: auto;
   color: var(--background-color);
 }
+
+.section-title {
+  font-size: 2.5rem;
+  line-height: 0.75;
+  font-weight: 600;
+  margin-top: 2rem;
+  color: var(--secondary-text-color);
+}

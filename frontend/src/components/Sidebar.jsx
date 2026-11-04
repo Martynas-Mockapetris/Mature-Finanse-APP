@@ -5,11 +5,11 @@ import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown, FaSignOutAlt, FaRegChart
 
 const Sidebar = () => {
   const menuItems = [
-    { id: 0, icon: FaRegChartBar, label: 'Overview' },
-    { id: 1, icon: FaChartPie, label: 'Stats' },
-    { id: 2, icon: FaHistory, label: 'History' },
-    { id: 3, icon: FaArrowUp, label: 'Income' },
-    { id: 4, icon: FaArrowDown, label: 'Expenses' }
+    { id: 1, icon: FaRegChartBar, label: 'Overview' },
+    { id: 2, icon: FaArrowUp, label: 'Income' },
+    { id: 3, icon: FaArrowDown, label: 'Expenses' },
+    { id: 4, icon: FaChartPie, label: 'Stats' },
+    { id: 5, icon: FaHistory, label: 'History' }
   ];
 
   const [active, setActive] = useState('Stats');

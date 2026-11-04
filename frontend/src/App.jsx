@@ -1,8 +1,6 @@
 import './App.css';
 import Sidebar from './components/Sidebar';
-import ExpensesSection from './components/ExpensesSection';
-import IncomeSection from './components/IncomeSection';
-import CreateNewCategory from './components/CreateNewTab';
+import Overview from './pages/Overview';
 
 const App = () => {
   return (
@@ -14,10 +12,8 @@ const App = () => {
         {/* Main content area */}
         <Sidebar />
         <div className="app-content">
-          {/* Components */}
-          <IncomeSection className="income-section" />
-          <ExpensesSection className="expenses-section" />
-          <CreateNewCategory />
+          {/* Pages */}
+          <Overview />
         </div>
       </div>
     </div>
