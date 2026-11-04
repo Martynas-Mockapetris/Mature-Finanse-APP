@@ -1,7 +1,7 @@
 import CategoryCard from './CategoryCard';
 import { GiShoppingCart, GiReceiveMoney, GiTakeMyMoney, GiPartyPopper, GiPriceTag } from 'react-icons/gi';
 import { getCategoriesByType } from '../services/storage';
-import '../styles/ExpensesSection.css';
+import '../styles/IncExpSection.css';
 
 const ExpensesSection = () => {
   const defaultCategories = [

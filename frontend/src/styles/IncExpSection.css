@@ -1,8 +1,9 @@
 .section {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .categories-grid {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.2rem;
 }
