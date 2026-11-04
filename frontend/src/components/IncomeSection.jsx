@@ -1,14 +1,23 @@
 import CategoryCard from './CategoryCard';
-import { GiBriefcase, GiMoneyStack, GiDiamonds, GiStockpiles } from 'react-icons/gi';
+import { GiBriefcase, GiMoneyStack, GiDiamonds, GiStockpiles, GiPriceTag } from 'react-icons/gi';
+import { getCategoriesByType } from '../services/storage';
 import '../styles/IncomeSection.css';
 
 const IncomeSection = () => {
-  const incomeCategories = [
+  const defaultCategories = [
     { id: 1, icon: GiBriefcase, label: 'Work' },
     { id: 2, icon: GiMoneyStack, label: 'Freelance' },
     { id: 3, icon: GiDiamonds, label: 'Dividends' },
     { id: 4, icon: GiStockpiles, label: 'Stocks' }
   ];
+
+  const savedCategories = getCategoriesByType('income').map((category) => ({
+    id: category.id,
+    icon: GiPriceTag,
+    label: category.name
+  }));
+
+  const incomeCategories = [...defaultCategories, ...savedCategories];
 
   const handleCategoryClick = (category) => {
     console.log('Income category clicked:', category.label);
