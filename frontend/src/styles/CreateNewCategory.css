@@ -1,18 +1,3 @@
-.section-create-title {
-  font-size: 1.6rem;
-  line-height: 1;
-  font-weight: 600;
-  color: var(--secondary-text-color);
-  letter-spacing: 0.5px;
-}
-
-.section-create-description {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--secondary-text-color);
-  margin-bottom: 1.25rem;
-}
-
 .create-new-btn {
   display: flex;
   align-items: center;

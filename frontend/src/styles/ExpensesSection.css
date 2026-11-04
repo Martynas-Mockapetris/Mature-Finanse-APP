@@ -2,21 +2,6 @@
   margin-bottom: 2rem;
 }
 
-.section-expense-title {
-  font-size: 1.6rem;
-  line-height: 1;
-  font-weight: 600;
-  color: var(--secondary-text-color);
-  letter-spacing: 0.5px;
-}
-
-.section-expense-description {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: var(--secondary-text-color);
-  margin-bottom: 1.25rem;
-}
-
 .categories-grid {
   display: flex;
   gap: 1.2rem;

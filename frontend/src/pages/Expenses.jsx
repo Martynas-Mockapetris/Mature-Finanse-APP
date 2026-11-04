@@ -1,7 +1,7 @@
 const Expenses = () => {
   return (
     <section className="section">
-      <h2 className="section-title">Expenses</h2>
+      <h2 className="section-title-main">Expenses</h2>
     </section>
   );
 };

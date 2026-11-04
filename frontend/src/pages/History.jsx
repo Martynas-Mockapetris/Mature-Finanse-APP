@@ -1,7 +1,7 @@
 const History = () => {
   return (
     <section className="section">
-      <h2 className="section-title">History</h2>
+      <h2 className="section-title-main">History</h2>
     </section>
   );
 };

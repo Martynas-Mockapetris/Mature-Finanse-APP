@@ -5,7 +5,7 @@ import CreateNewCategory from '../components/CreateNewTab';
 const Overview = () => {
   return (
     <>
-      <h2 className="section-title">Overview</h2>
+      <h2 className="section-title-main">Overview</h2>
       <IncomeSection />
       <ExpensesSection />
       <CreateNewCategory />

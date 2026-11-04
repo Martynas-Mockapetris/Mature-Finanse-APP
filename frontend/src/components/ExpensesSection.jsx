@@ -16,8 +16,8 @@ const ExpensesSection = () => {
 
   return (
     <section className="section">
-      <h2 className="section-expense-title">My Expenses</h2>
-      <p className="section-expense-description">Track and manage your expenses by category</p>
+      <h2 className="section-title">My Expenses</h2>
+      <p className="section-description">Track and manage your expenses by category</p>
       <div className="categories-grid">
         {expenseCategories.map((category) => (
           <CategoryCard key={category.id} icon={category.icon} label={category.label} onClick={() => handleCategoryClick(category)} type="expense" />

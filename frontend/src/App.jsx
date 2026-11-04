@@ -6,6 +6,7 @@ import Overview from './pages/Overview';
 import History from './pages/History';
 import Income from './pages/Income';
 import Expenses from './pages/Expenses';
+import NewCategory from './pages/NewCategory';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/history" element={<History />} />
             <Route path="/income" element={<Income />} />
             <Route path="/expenses" element={<Expenses />} />
+            <Route path="/categories/new" element={<NewCategory />} />
           </Routes>
         </div>
       </div>
