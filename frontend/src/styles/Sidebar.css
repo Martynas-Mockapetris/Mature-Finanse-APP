@@ -85,3 +85,9 @@
   background-color: var(--red-color);
   color: var(--text-color);
 }
+
+.sidebar-link:hover,
+.sidebar-link--active {
+  background-color: var(--secondary-green-color);
+  color: var(--text-color);
+}
