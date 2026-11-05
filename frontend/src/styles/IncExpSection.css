@@ -7,3 +7,10 @@
   flex-wrap: wrap;
   gap: 1.2rem;
 }
+
+.total-amount {
+  margin: 0.5rem 0;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+  font-size: 1.2rem;
+}

@@ -44,3 +44,12 @@ export const addTransaction = ({ type, categoryId, amount, date, note }) => {
 
 // Get transactions filtered by type (expense or income)
 export const getTransactionsByType = (type) => getTransactions().filter((transaction) => transaction.type === type);
+
+// Sum the amounts of all transactions of a given type
+// export const getTotalByType = (type) => getTransactionsByType(type).reduce((sum, transaction) => sum + transaction.amount, 0);
+
+// Get the total amount of transactions by type, rounded to 2 decimal places
+export const getTotalByType = (type) => {
+  const total = getTransactionsByType(type).reduce((sum, transaction) => sum + transaction.amount, 0);
+  return Math.round(total * 100) / 100;
+};
