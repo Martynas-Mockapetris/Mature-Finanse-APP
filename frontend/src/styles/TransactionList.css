@@ -8,7 +8,7 @@
 
 .transaction-item--header {
   display: grid;
-  grid-template-columns: 8rem 10rem 1fr auto;
+  grid-template-columns: 8rem 10rem 1fr auto 2.5rem;
   gap: 1rem;
   align-items: center;
   padding: 0.8rem 1.35rem;
@@ -18,7 +18,7 @@
 
 .transaction-item {
   display: grid;
-  grid-template-columns: 8rem 10rem 1fr auto;
+  grid-template-columns: 8rem 10rem 1fr auto 2.5rem;
   gap: 1rem;
   align-items: center;
   padding: 0.8rem 1rem;
@@ -46,4 +46,20 @@
   font-size: 1.2rem;
   color: var(--secondary-text-color);
   opacity: 0.7;
+}
+
+.transaction-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--red-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+}
+
+.transaction-delete:hover {
+  color: var(--secondary-red-color);
 }
