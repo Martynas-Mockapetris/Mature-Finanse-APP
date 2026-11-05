@@ -8,7 +8,7 @@
 
 .transaction-item--header {
   display: grid;
-  grid-template-columns: 8rem 10rem 1fr auto 2.5rem;
+  grid-template-columns: 8rem 10rem 1fr auto 4.75rem;
   gap: 1rem;
   align-items: center;
   padding: 0.8rem 1.35rem;
@@ -18,7 +18,7 @@
 
 .transaction-item {
   display: grid;
-  grid-template-columns: 8rem 10rem 1fr auto 2.5rem;
+  grid-template-columns: 8rem 10rem 1fr auto 5rem;
   gap: 1rem;
   align-items: center;
   padding: 0.8rem 1rem;
@@ -48,6 +48,14 @@
   opacity: 0.7;
 }
 
+/* Transaction actions (edit and delete buttons) */
+.transaction-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
 .transaction-delete {
   display: flex;
   align-items: center;
@@ -62,4 +70,16 @@
 
 .transaction-delete:hover {
   color: var(--secondary-red-color);
+}
+
+.transaction-edit {
+  display: flex;
+  align-items: center;
+  color: var(--secondary-text-color);
+  font-size: 1.05rem;
+  transition: color 0.2s ease-in;
+}
+
+.transaction-edit:hover {
+  color: var(--secondary-green-color);
 }

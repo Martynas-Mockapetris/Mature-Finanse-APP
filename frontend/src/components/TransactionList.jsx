@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { findCategory } from '../services/storage';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaPen } from 'react-icons/fa';
 import '../styles/TransactionList.css';
 
 const TransactionList = ({ type, transactions, onDelete }) => {
@@ -24,9 +25,14 @@ const TransactionList = ({ type, transactions, onDelete }) => {
           <span className="transaction-category">{findCategory(type, transaction.categoryId)?.name ?? 'Unknown category'}</span>
           <span className="transaction-note">{transaction.note}</span>
           <span className="transaction-amount">{transaction.amount.toFixed(2)}</span>
-          <span className="transaction-delete">
-            <FaTrash onClick={() => onDelete(transaction.id)} title="Delete Transaction" />
-          </span>
+          <div className="transaction-actions">
+            <Link to={`/transactions/${transaction.id}/edit`} className="transaction-edit" aria-label="Edit transaction" title="Edit">
+              <FaPen />
+            </Link>
+            <button className="transaction-delete" onClick={() => onDelete(transaction.id)} aria-label="Delete transaction" title="Delete">
+              <FaTrash />
+            </button>
+          </div>
         </li>
       ))}
     </ul>
