@@ -59,3 +59,12 @@ export const deleteTransaction = (id) => {
   const remaining = getTransactions().filter((transaction) => transaction.id !== id);
   localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(remaining));
 };
+
+// Find a single transaction by id
+export const findTransaction = (id) => getTransactions().find((transaction) => transaction.id === id);
+
+// Update fields of a transaction by id
+export const updateTransaction = (id, changes) => {
+  const updated = getTransactions().map((transaction) => (transaction.id === id ? { ...transaction, ...changes } : transaction));
+  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(updated));
+};
