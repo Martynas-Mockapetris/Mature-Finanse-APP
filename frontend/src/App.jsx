@@ -7,6 +7,7 @@ import Transactions from './pages/Transactions';
 import History from './pages/History';
 import NewCategory from './pages/NewCategory';
 import AddTransaction from './pages/AddTransaction';
+import EditTransaction from './pages/EditTransaction';
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/history" element={<History />} />
             <Route path="/categories/new" element={<NewCategory />} />
             <Route path="/transactions/new/:type/:categoryId" element={<AddTransaction />} />
+            <Route path="/transactions/:id/edit" element={<EditTransaction />} />
           </Routes>
         </div>
       </div>
