@@ -1,8 +1,8 @@
-import { getTransactionsByType, findCategory } from '../services/storage';
+import { findCategory } from '../services/storage';
 import '../styles/TransactionList.css';
 
-const TransactionList = ({ type }) => {
-  const transactions = getTransactionsByType(type).sort((a, b) => b.date.localeCompare(a.date));
+const TransactionList = ({ type, transactions }) => {
+  const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
   if (transactions.length === 0) {
     return <p className="transaction-empty">No {type} transactions yet.</p>;
@@ -16,7 +16,7 @@ const TransactionList = ({ type }) => {
         <span className="transaction-note-header">Note</span>
         <span className="transaction-amount-header">Amount</span>
       </li>
-      {transactions.map((transaction) => (
+      {sorted.map((transaction) => (
         <li key={transaction.id} className={`transaction-item transaction-item--${type}`}>
           <span className="transaction-date">{transaction.date}</span>
           <span className="transaction-category">{findCategory(type, transaction.categoryId)?.name ?? 'Unknown category'}</span>
