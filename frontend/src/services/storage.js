@@ -19,14 +19,16 @@ export const addCategory = ({ name, type }) => {
 // Get categories filtered by type (expense or income)
 export const getCategoriesByType = (type) => getCategories().filter((category) => category.type === type);
 
-// Find a category by type and ID, including default and user-added categories
-export const findCategory = (type, id) => {
+// Get default and user-added categories for one type (expense or income)
+export const getAvailableCategories = (type) => {
   const defaults = type === 'income' ? defaultIncomeCategories : defaultExpenseCategories;
-  return [...defaults, ...getCategoriesByType(type)].find((category) => category.id === id);
+  return [...defaults, ...getCategoriesByType(type)];
 };
 
-// Get all categories, including default and user-added
-export const getAllCategories = () => [...defaultExpenseCategories, ...defaultIncomeCategories, ...getCategories()];
+// Find a category by type and ID, including default and user-added categories
+export const findCategory = (type, id) => {
+  return getAvailableCategories(type).find((category) => category.id === id);
+};
 
 // Get and add transactions to local storage
 const TRANSACTIONS_KEY = 'transactions';
