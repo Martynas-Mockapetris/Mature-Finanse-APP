@@ -4,6 +4,10 @@ import '../styles/TransactionList.css';
 const TransactionList = ({ type }) => {
   const transactions = getTransactionsByType(type).sort((a, b) => b.date.localeCompare(a.date));
 
+  if (transactions.length === 0) {
+    return <p className="transaction-empty">No {type} transactions yet.</p>;
+  }
+
   return (
     <ul className="transaction-list">
       <li className="transaction-item--header">
