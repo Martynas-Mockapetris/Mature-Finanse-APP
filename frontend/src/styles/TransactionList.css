@@ -6,9 +6,19 @@
   margin-top: 2rem;
 }
 
+.transaction-item--header {
+  display: grid;
+  grid-template-columns: 8rem 10rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.8rem 1.35rem;
+  font-weight: 600;
+  color: var(--secondary-text-color);
+}
+
 .transaction-item {
   display: grid;
-  grid-template-columns: 8rem 1fr auto;
+  grid-template-columns: 8rem 10rem 1fr auto;
   gap: 1rem;
   align-items: center;
   padding: 0.8rem 1rem;
