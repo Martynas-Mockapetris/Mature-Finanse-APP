@@ -10,7 +10,7 @@ const TransactionForm = ({ initialValues, submitLabel, cancelTo, onSubmit }) => 
   const handleSubmit = (e) => {
     e.preventDefault();
     const value = Number(amount);
-    if (!value || value <= 0) return;
+    if (!value || value <= 0 || !date) return;
 
     onSubmit({ amount: value, date, note: note.trim() });
   };
