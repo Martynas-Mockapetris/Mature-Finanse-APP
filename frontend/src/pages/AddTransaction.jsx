@@ -9,10 +9,10 @@ const AddTransaction = () => {
 
   const navigate = useNavigate();
 
-const handleSubmit = (values) => {
-  addTransaction({ type, categoryId, ...values });
-  navigate('/');
-};
+  const handleSubmit = (values) => {
+    addTransaction({ type, categoryId, ...values });
+    navigate('/');
+  };
 
   if (!category) {
     return (
@@ -36,7 +36,7 @@ const handleSubmit = (values) => {
       </h2>
       <p className="section-description">Record a new {type} in this category</p>
 
-      <TransactionForm initialValues={{ amount: '', date: new Date().toISOString().slice(0, 10), note: '' }} submitLabel={`Add ${type}`} cancelTo="/" onSubmit={handleSubmit} />
+      <TransactionForm type={type} initialValues={{ categoryId, amount: '', date: new Date().toISOString().slice(0, 10), note: '' }} submitLabel={`Add ${type}`} cancelTo="/" onSubmit={handleSubmit} />
     </section>
   );
 };

@@ -38,7 +38,13 @@ const EditTransaction = () => {
       </h2>
       <p className="section-description">Change the details of this transaction</p>
 
-      <TransactionForm initialValues={{ amount: transaction.amount, date: transaction.date, note: transaction.note }} submitLabel="Save changes" cancelTo={listPath} onSubmit={handleSubmit} />
+      <TransactionForm
+        type={transaction.type}
+        initialValues={{ categoryId: transaction.categoryId, amount: transaction.amount, date: transaction.date, note: transaction.note }}
+        submitLabel="Save changes"
+        cancelTo={listPath}
+        onSubmit={handleSubmit}
+      />
     </section>
   );
 };

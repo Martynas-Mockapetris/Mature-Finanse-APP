@@ -1,22 +1,37 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getAvailableCategories } from '../services/storage';
 import '../styles/FormSection.css';
 
-const TransactionForm = ({ initialValues, submitLabel, cancelTo, onSubmit }) => {
+const TransactionForm = ({ type, initialValues, submitLabel, cancelTo, onSubmit }) => {
   const [amount, setAmount] = useState(initialValues.amount);
   const [date, setDate] = useState(initialValues.date);
   const [note, setNote] = useState(initialValues.note);
+  const [categoryId, setCategoryId] = useState(initialValues.categoryId);
+  const categories = getAvailableCategories(type);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const value = Number(amount);
     if (!value || value <= 0 || !date) return;
 
-    onSubmit({ amount: value, date, note: note.trim() });
+    onSubmit({ categoryId, amount: value, date, note: note.trim() });
   };
 
   return (
     <form className="category-form" onSubmit={handleSubmit}>
+      <div className="form-field">
+        <label className="form-label" htmlFor="category">
+          Category
+        </label>
+        <select id="category" className="form-input" value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="form-field">
         <label className="form-label" htmlFor="amount">
           Amount
