@@ -41,3 +41,6 @@ export const addTransaction = ({ type, categoryId, amount, date, note }) => {
   localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify([...transactions, newTransaction]));
   return newTransaction;
 };
+
+// Get transactions filtered by type (expense or income)
+export const getTransactionsByType = (type) => getTransactions().filter((transaction) => transaction.type === type);
