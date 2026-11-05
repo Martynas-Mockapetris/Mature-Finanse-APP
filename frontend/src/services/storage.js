@@ -53,3 +53,9 @@ export const getTotalByType = (type) => {
   const total = getTransactionsByType(type).reduce((sum, transaction) => sum + transaction.amount, 0);
   return Math.round(total * 100) / 100;
 };
+
+// Remove a transaction by id
+export const deleteTransaction = (id) => {
+  const remaining = getTransactions().filter((transaction) => transaction.id !== id);
+  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(remaining));
+};
