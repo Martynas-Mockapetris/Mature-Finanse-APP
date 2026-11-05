@@ -3,9 +3,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Stats from './pages/Stats';
 import Overview from './pages/Overview';
+import Transactions from './pages/Transactions';
 import History from './pages/History';
-import Income from './pages/Income';
-import Expenses from './pages/Expenses';
 import NewCategory from './pages/NewCategory';
 import AddTransaction from './pages/AddTransaction';
 
@@ -25,8 +24,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Overview />} />
             <Route path="/stats" element={<Stats />} />
-            <Route path="/income" element={<Income />} />
-            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/income" element={<Transactions type="income" />} />
+            <Route path="/expenses" element={<Transactions type="expense" />} />
             <Route path="/history" element={<History />} />
             <Route path="/categories/new" element={<NewCategory />} />
             <Route path="/transactions/new/:type/:categoryId" element={<AddTransaction />} />

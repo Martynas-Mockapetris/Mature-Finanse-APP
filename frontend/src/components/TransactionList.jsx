@@ -25,7 +25,7 @@ const TransactionList = ({ type, transactions, onDelete }) => {
           <span className="transaction-note">{transaction.note}</span>
           <span className="transaction-amount">{transaction.amount.toFixed(2)}</span>
           <span className="transaction-delete">
-            <FaTrash onClick={() => onDelete(transaction.id)} />
+            <FaTrash onClick={() => onDelete(transaction.id)} title="Delete Transaction" />
           </span>
         </li>
       ))}
