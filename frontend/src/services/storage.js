@@ -25,6 +25,9 @@ export const findCategory = (type, id) => {
   return [...defaults, ...getCategoriesByType(type)].find((category) => category.id === id);
 };
 
+// Get all categories, including default and user-added
+export const getAllCategories = () => [...defaultExpenseCategories, ...defaultIncomeCategories, ...getCategories()];
+
 // Get and add transactions to local storage
 const TRANSACTIONS_KEY = 'transactions';
 

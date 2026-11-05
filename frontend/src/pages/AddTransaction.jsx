@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { findCategory, addTransaction } from '../services/storage';
 import TransactionForm from '../components/TransactionForm';
-import '../styles/FormSection.css';
 
 const AddTransaction = () => {
   const { type, categoryId } = useParams();
@@ -11,14 +9,10 @@ const AddTransaction = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const value = Number(amount);
-    if (!value || value <= 0) return;
-
-    addTransaction({ type, categoryId, amount: value, date, note: note.trim() });
-    navigate('/');
-  };
+const handleSubmit = (values) => {
+  addTransaction({ type, categoryId, ...values });
+  navigate('/');
+};
 
   if (!category) {
     return (
