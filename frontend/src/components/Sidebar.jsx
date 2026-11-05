@@ -7,9 +7,9 @@ const Sidebar = () => {
   const menuItems = [
     { id: 1, icon: FaChartPie, label: 'Overview', path: '/' },
     { id: 2, icon: FaRegChartBar, label: 'Stats', path: '/stats' },
-    { id: 3, icon: FaHistory, label: 'History', path: '/history' },
-    { id: 4, icon: FaArrowUp, label: 'Income', path: '/income' },
-    { id: 5, icon: FaArrowDown, label: 'Expenses', path: '/expenses' }
+    { id: 3, icon: FaArrowUp, label: 'Income', path: '/income' },
+    { id: 4, icon: FaArrowDown, label: 'Expenses', path: '/expenses' },
+    { id: 5, icon: FaHistory, label: 'History', path: '/history' }
   ];
 
   const handleLogout = () => {
