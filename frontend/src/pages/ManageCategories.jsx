@@ -1,6 +1,9 @@
 import { getCategoriesByType } from '../services/storage';
+import { Link } from 'react-router-dom';
+import '../styles/CategoryCard.css';
 import '../styles/ManageCategories.css';
 import { GiPriceTag } from 'react-icons/gi';
+import { FaPen } from 'react-icons/fa';
 
 const categoryGroups = [
   { type: 'expense', title: 'Custom Expenses' },
@@ -20,16 +23,19 @@ const ManageCategories = () => {
             <h3>{group.title}</h3>
             {categories.length === 0 ?
               <p>No custom categories yet.</p>
-            : <ul className="managed-category-list">
+            : <div className="managed-category-grid">
                 {categories.map((category) => (
                   <article key={category.id} className={`category-card category-card--${group.type} category-card--managed`}>
                     <div className="category-icon">
                       <GiPriceTag size={40} />
                     </div>
                     <p className="category-label">{category.name}</p>
+                    <Link to={`/categories/${category.id}/edit`} className="managed-category-edit" aria-label={`Edit ${category.name}`} title="Edit category">
+                      <FaPen className="managed-category-edit-icon" />
+                    </Link>
                   </article>
                 ))}
-              </ul>
+              </div>
             }
           </section>
         );
