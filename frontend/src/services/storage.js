@@ -90,3 +90,22 @@ export const updateCategory = (id, name) => {
   localStorage.setItem(CATEGORIES_KEY, JSON.stringify(updatedCategories));
   return updatedCategories.find((category) => category.id === id);
 };
+
+// Delete a custom category and all transactions that use it
+export const deleteCategory = (id) => {
+  const categories = getCategories();
+  const category = categories.find((item) => item.id === id);
+
+  if (!category) {
+    return null;
+  }
+
+  const transactions = getTransactions();
+  const linkedTransactions = transactions.filter((transaction) => transaction.categoryId === id);
+
+  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(transactions.filter((transaction) => transaction.categoryId !== id)));
+
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories.filter((item) => item.id !== id)));
+
+  return { category, deletedTransactionCount: linkedTransactions.length };
+};
