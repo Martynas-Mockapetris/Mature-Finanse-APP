@@ -56,7 +56,7 @@ const ManageCategories = () => {
                       </Link>
 
                       <button type="button" className="managed-category-delete" onClick={() => handleDelete(category)} aria-label={`Delete ${category.name}`} title="Delete category">
-                        <FaTrash />
+                        <FaTrash className="managed-category-delete-icon" />
                       </button>
                     </div>
                   </article>
