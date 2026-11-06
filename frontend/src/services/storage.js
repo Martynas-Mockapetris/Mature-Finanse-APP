@@ -73,3 +73,20 @@ export const updateTransaction = (id, changes) => {
   const updated = getTransactions().map((transaction) => (transaction.id === id ? { ...transaction, ...changes } : transaction));
   localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(updated));
 };
+
+// Find a user-created category by ID
+export const findCustomCategory = (id) => getCategories().find((category) => category.id === id);
+
+// Rename a user-created category by ID
+export const updateCategory = (id, name) => {
+  const categories = getCategories();
+
+  if (!categories.some((category) => category.id === id)) {
+    return null;
+  }
+
+  const updatedCategories = categories.map((category) => (category.id === id ? { ...category, name } : category));
+
+  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(updatedCategories));
+  return updatedCategories.find((category) => category.id === id);
+};
