@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import '../styles/Sidebar.css';
 import { GiWolfHowl } from 'react-icons/gi';
-import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown, FaSignOutAlt, FaRegChartBar } from 'react-icons/fa';
+import { FaChartPie, FaHistory, FaArrowUp, FaArrowDown, FaSignOutAlt, FaRegChartBar, FaTags } from 'react-icons/fa';
 
 const Sidebar = () => {
   const menuItems = [
@@ -9,7 +9,8 @@ const Sidebar = () => {
     { id: 2, icon: FaRegChartBar, label: 'Stats', path: '/stats' },
     { id: 3, icon: FaArrowUp, label: 'Income', path: '/income' },
     { id: 4, icon: FaArrowDown, label: 'Expenses', path: '/expenses' },
-    { id: 5, icon: FaHistory, label: 'History', path: '/history' }
+    { id: 5, icon: FaHistory, label: 'History', path: '/history' },
+    { id: 6, icon: FaTags, label: 'Categories', path: '/categories' } 
   ];
 
   const handleLogout = () => {
