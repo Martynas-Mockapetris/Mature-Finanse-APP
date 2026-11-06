@@ -7,7 +7,7 @@ const TransactionList = ({ type, transactions, onDelete }) => {
   const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
   if (transactions.length === 0) {
-    return <p className="transaction-empty">No {type} transactions yet.</p>;
+    return <p className="transaction-empty">{type === 'all' ? 'No transactions yet.' : `No ${type} transactions yet.`}</p>;
   }
 
   return (
@@ -20,9 +20,9 @@ const TransactionList = ({ type, transactions, onDelete }) => {
         <span></span>
       </li>
       {sorted.map((transaction) => (
-        <li key={transaction.id} className={`transaction-item transaction-item--${type}`}>
+        <li key={transaction.id} className={`transaction-item transaction-item--${transaction.type}`}>
           <span className="transaction-date">{transaction.date}</span>
-          <span className="transaction-category">{findCategory(type, transaction.categoryId)?.name ?? 'Unknown category'}</span>
+          <span className="transaction-category">{findCategory(transaction.type, transaction.categoryId)?.name ?? 'Unknown category'}</span>
           <span className="transaction-note">{transaction.note}</span>
           <span className="transaction-amount">{transaction.amount.toFixed(2)}</span>
           <div className="transaction-actions">
