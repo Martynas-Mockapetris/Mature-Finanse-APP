@@ -9,6 +9,7 @@ import NewCategory from './pages/NewCategory';
 import AddTransaction from './pages/AddTransaction';
 import EditTransaction from './pages/EditTransaction';
 import ManageCategories from './pages/ManageCategories';
+import EditCategory from './pages/EditCategory';
 
 const App = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/transactions/new/:type/:categoryId" element={<AddTransaction />} />
             <Route path="/transactions/:id/edit" element={<EditTransaction />} />
             <Route path="/categories" element={<ManageCategories />} />
+            <Route path="/categories/:id/edit" element={<EditCategory />} />
           </Routes>
         </div>
       </div>
