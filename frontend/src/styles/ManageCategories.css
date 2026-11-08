@@ -34,6 +34,7 @@
 
 .managed-category-edit,
 .managed-category-delete {
+  border: none;
   text-decoration: none;
   transition: opacity 0.1s ease-in;
 }
