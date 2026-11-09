@@ -1,5 +1,6 @@
 const User = require('../models/User');
-const { hashPassword } = require('../utils/password');
+const { hashPassword, verifyPassword } = require('../utils/password');
+const { signToken } = require('../utils/token');
 
 const register = async (req, res, next) => {
   const { email, password } = req.body ?? {};
@@ -37,4 +38,28 @@ const register = async (req, res, next) => {
   }
 };
 
-module.exports = { register };
+const login = async (req, res, next) => {
+  const { email, password } = req.body ?? {};
+
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
+
+  try {
+    const user = await User.findOne({ email: email.trim().toLowerCase() }).select('+passwordHash');
+    const isValid = user ? await verifyPassword(password, user.passwordHash) : false;
+
+    if (!isValid) {
+      return res.status(401).json({ message: 'Invalid email or password.' });
+    }
+
+    return res.json({
+      token: signToken(user),
+      user: { id: user.id, email: user.email }
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = { register, login };
