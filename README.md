@@ -1,25 +1,36 @@
 # Mature Finance App
 
-A full-stack MERN budget tracking application designed to help users manage their personal finances. The application allows users to track income and expenses, organize transactions into custom categories, and monitor their budgets through an interactive interface.
+A budget tracking application in development using the MERN stack. It helps users
+record income and expenses, organize transactions into categories, and view
+financial statistics.
 
-## ✨ Features
+Currently, the frontend stores data in the browser's localStorage. Accounts
+and MongoDB storage are planned but not connected yet.
 
-- **Expense Tracking** — Record and manage expenses using custom categories.
-- **Income Tracking** — Keep track of income and monitor incoming transactions.
-- **Custom Categories** — Organize financial transactions into personalized categories.
-- **User Authentication** — Secure user authentication using JSON Web Tokens (JWT).
-- **Budget Management** — Monitor finances with real-time budget updates.
-- **Responsive Design** — Mobile-responsive interface for managing finances across different devices.
-- **Secure Backend** — Express API connected to MongoDB for storing and managing application data.
+## ✨ Current Features
+
+- Record, edit, and delete income and expense transactions.
+- Create, rename, and delete custom categories.
+- View transaction history and financial statistics.
+- Compare current month-to-date savings with the previous full month.
+
+## 🔮 Planned Features
+
+- User registration and login with JWT authentication.
+- Store each user's categories and transactions in MongoDB.
+- User profiles with a choice of avatar icons.
+- Improve mobile responsiveness.
+- Deploy the frontend and backend on Render.
 
 ## 🛠️ Technologies Used
 
-- **React 18** — Component-based frontend development.
+- **React 19** — Component-based frontend development.
 - **JavaScript (ES6+)** — Application logic and data handling.
 - **Vite** — Frontend development server and production build tooling.
 - **Node.js** — Backend JavaScript runtime.
 - **Express.js** — REST API and server-side application framework.
 - **MongoDB** — Database for storing user and financial information.
+- **Mongoose** — Defines MongoDB models.
 - **JWT** — Token-based user authentication.
 - **React Icons** — Icons and visual elements.
 - **Comfortaa & Dosis** — Typography and UI styling.
@@ -56,7 +67,7 @@ Mature-Finance-App/
 2. Navigate to the project directory:
 
    ```bash
-   cd Mature-Finance-App
+   cd Mature-Finance-APP
    ```
 
 ### Frontend Setup
@@ -93,10 +104,16 @@ Mature-Finance-App/
    npm install
    ```
 
-8. Start the backend development server:
+8. Create a `backend\.env` file containing:
+
+   ```env
+   PORT=5000
+   ```
+
+9. Start the backend development server:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
 **Note:** Configure the required environment variables for your backend, including your MongoDB connection string and JWT secret, before starting the server.
