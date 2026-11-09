@@ -105,3 +105,13 @@
   background-color: var(--secondary-green-color);
   border-color: var(--secondary-green-color);
 }
+
+.form-input--plain {
+  text-transform: none;
+}
+
+.form-error {
+  color: var(--red-color);
+  font-family: 'Dosis', sans-serif;
+  font-size: 1.1rem;
+}

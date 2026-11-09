@@ -1,0 +1,31 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 28rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: var(--text-color);
+}
+
+.auth-title {
+  font-family: 'Comfortaa', sans-serif;
+  color: var(--background-color);
+  margin-bottom: 0.5rem;
+}
+
+.auth-switch {
+  margin-top: 1.5rem;
+  font-family: 'Dosis', sans-serif;
+  color: var(--secondary-text-color);
+}
+
+.auth-switch a {
+  color: var(--background-color);
+}
