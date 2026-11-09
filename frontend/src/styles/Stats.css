@@ -35,3 +35,8 @@
 .stats-card--balance {
   border-color: var(--background-color);
 }
+
+.stats-subheading {
+  margin: 2rem 0 1rem;
+  color: var(--secondary-text-color);
+}
