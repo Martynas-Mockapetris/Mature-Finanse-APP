@@ -3,9 +3,11 @@ const express = require('express');
 const connectDatabase = require('./config/db');
 const User = require('./models/User');
 const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
 app.use('/api/auth', authRoutes);
 const port = Number(process.env.PORT);
 
