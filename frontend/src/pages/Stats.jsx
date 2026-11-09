@@ -25,8 +25,40 @@ const Stats = () => {
 
   const currentMonthExpenseCount = currentMonthTransactions.filter((transaction) => transaction.type === 'expense').length;
 
+  const previousMonthDate = new Date(year, today.getMonth() - 1, 1);
+  const previousYear = previousMonthDate.getFullYear();
+  const previousMonth = String(previousMonthDate.getMonth() + 1).padStart(2, '0');
+  const previousMonthStart = `${previousYear}-${previousMonth}-01`;
+
+  const previousMonthTransactions = transactions.filter((transaction) => transaction.date >= previousMonthStart && transaction.date < monthStart);
+
+  const calculateNetSavings = (periodTransactions) => {
+    const net = periodTransactions.reduce((sum, transaction) => {
+      return transaction.type === 'income' ? sum + transaction.amount : sum - transaction.amount;
+    }, 0);
+
+    return Math.round(net * 100) / 100;
+  };
+
+  const currentSavings = calculateNetSavings(currentMonthTransactions);
+  const previousSavings = calculateNetSavings(previousMonthTransactions);
+  const savingsChange = Math.round((currentSavings - previousSavings) * 100) / 100;
+
+  let savingsTrend;
+
+  if (currentMonthTransactions.length === 0 || previousMonthTransactions.length === 0) {
+    savingsTrend = 'Add transactions to both periods to see a comparison.';
+  } else if (savingsChange > 0) {
+    savingsTrend = `+ ${savingsChange.toFixed(2)}`;
+  } else if (savingsChange < 0) {
+    savingsTrend = `- ${Math.abs(savingsChange).toFixed(2)}`;
+  } else {
+    savingsTrend = 'No change';
+  }
+
   return (
     <section className="section">
+      {/* All-time summary */}
       <h2 className="section-title-main">Statistics</h2>
       <p className="section-description">All-time summary</p>
 
@@ -46,6 +78,8 @@ const Stats = () => {
           <p>{balance.toFixed(2)}</p>
         </article>
       </div>
+
+      {/* All-time transaction counts */}
       <h3 className="stats-subheading">All-time transaction counts</h3>
       <div className="stats-grid">
         <article className="stats-card">
@@ -62,6 +96,7 @@ const Stats = () => {
         </article>
       </div>
 
+      {/* Current month to date transaction counts */}
       <h3 className="stats-subheading">Current month to date</h3>
       <div className="stats-grid">
         <article className="stats-card">
@@ -75,6 +110,26 @@ const Stats = () => {
         <article className="stats-card stats-card--expense">
           <h3>Expense Transactions</h3>
           <p>{currentMonthExpenseCount}</p>
+        </article>
+      </div>
+
+      {/* Savings comparison */}
+      <h3 className="stats-subheading">Savings comparison</h3>
+      <p className="section-description">Current month vs. Previous month.</p>
+      <div className="stats-grid">
+        <article className="stats-card stats-card--balance">
+          <h3>Current Month Savings</h3>
+          <p>{currentSavings.toFixed(2)}</p>
+        </article>
+
+        <article className="stats-card stats-card--balance">
+          <h3>Previous Month Savings</h3>
+          <p>{previousSavings.toFixed(2)}</p>
+        </article>
+
+        <article className="stats-card stats-card--balance">
+          <h3>Savings Trend</h3>
+          <p className="stats-trend">{savingsTrend}</p>
         </article>
       </div>
     </section>
