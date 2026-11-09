@@ -12,4 +12,12 @@ const hashPassword = async (password) => {
   return bcrypt.hash(password, 12);
 };
 
-module.exports = { hashPassword };
+const verifyPassword = async (password, passwordHash) => {
+  if (typeof password !== 'string' || typeof passwordHash !== 'string') {
+    return false;
+  }
+
+  return bcrypt.compare(password, passwordHash);
+};
+
+module.exports = { hashPassword, verifyPassword };
