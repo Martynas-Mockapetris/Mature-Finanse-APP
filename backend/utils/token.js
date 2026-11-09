@@ -10,4 +10,12 @@ const signToken = (user) => {
   });
 };
 
-module.exports = { signToken };
+const verifyToken = (token) => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is missing from the environment.');
+  }
+
+  return jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+};
+
+module.exports = { signToken, verifyToken };
