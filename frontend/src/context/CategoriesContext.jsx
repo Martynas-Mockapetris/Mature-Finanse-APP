@@ -22,6 +22,14 @@ export const CategoriesProvider = ({ children }) => {
     return created;
   };
 
+  const updateCategory = async (id, name) => {
+    const updated = await apiRequest(`/categories/${id}`, { method: 'PATCH', body: { name } });
+    setCustomCategories((current) => current.map((category) => (category.id === id ? updated : category)));
+    return updated;
+  };
+
+  const findCustomCategory = (id) => customCategories.find((category) => category.id === id);
+
   const getCategoriesByType = (type) => customCategories.filter((category) => category.type === type);
 
   const getAvailableCategories = (type) => {
@@ -34,7 +42,7 @@ export const CategoriesProvider = ({ children }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="form-error">{error}</p>;
 
-  return <CategoriesContext.Provider value={{ addCategory, getCategoriesByType, getAvailableCategories, findCategory }}>{children}</CategoriesContext.Provider>;
+  return <CategoriesContext.Provider value={{ addCategory, updateCategory, findCustomCategory, getCategoriesByType, getAvailableCategories, findCategory }}>{children}</CategoriesContext.Provider>;
 };
 
 export const useCategories = () => useContext(CategoriesContext);

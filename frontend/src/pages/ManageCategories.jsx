@@ -1,5 +1,5 @@
-import { getCategoriesByType, getTransactions, deleteCategory } from '../services/storage';
-import { useState } from 'react';
+import { getTransactions, deleteCategory } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import { Link } from 'react-router-dom';
 import '../styles/CategoryCard.css';
 import '../styles/ManageCategories.css';
@@ -12,7 +12,8 @@ const categoryGroups = [
 ];
 
 const ManageCategories = () => {
-  const [categories, setCategories] = useState(() => [...getCategoriesByType('expense'), ...getCategoriesByType('income')]);
+  const { getCategoriesByType } = useCategories();
+  const categories = [...getCategoriesByType('expense'), ...getCategoriesByType('income')];
 
   const handleDelete = (category) => {
     const linkedCount = getTransactions().filter((transaction) => transaction.categoryId === category.id).length;
@@ -28,7 +29,7 @@ const ManageCategories = () => {
       return;
     }
 
-    setCategories((current) => current.filter((item) => item.id !== category.id));
+    // setCategories((current) => current.filter((item) => item.id !== category.id));
   };
 
   return (

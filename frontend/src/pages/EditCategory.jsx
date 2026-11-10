@@ -1,25 +1,33 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { findCustomCategory, updateCategory } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import '../styles/FormSection.css';
 
 const EditCategory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { findCustomCategory, updateCategory } = useCategories();
   const category = findCustomCategory(id);
   const [name, setName] = useState(category?.name ?? '');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmedName = name.trim();
 
     if (!trimmedName) return;
 
-    const updatedCategory = updateCategory(id, trimmedName);
+    setError('');
+    setSubmitting(true);
 
-    if (updatedCategory) {
+    try {
+      await updateCategory(id, trimmedName);
       navigate('/categories');
+    } catch (err) {
+      setError(err.message);
+      setSubmitting(false);
     }
   };
 
@@ -53,8 +61,9 @@ const EditCategory = () => {
           <input id="category-name" className="form-input" type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
 
+        {error && <p className="form-error">{error}</p>}
         <div className="btn-container">
-          <button className="form-submit" type="submit">
+          <button className="form-submit" type="submit" disabled={submitting}>
             Save Changes
           </button>
         </div>
