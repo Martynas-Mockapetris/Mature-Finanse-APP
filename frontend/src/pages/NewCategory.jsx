@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { addCategory } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import '../styles/FormSection.css';
 
 const NewCategory = () => {
@@ -9,14 +9,25 @@ const NewCategory = () => {
   const [type, setType] = useState('expense');
 
   const navigate = useNavigate();
+  const { addCategory } = useCategories();
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) return;
 
-    addCategory({ name: trimmed, type });
-    navigate('/');
+    setError('');
+    setSubmitting(true);
+
+    try {
+      await addCategory({ name: trimmed, type });
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -45,8 +56,9 @@ const NewCategory = () => {
           </select>
         </div>
 
+        {error && <p className="form-error">{error}</p>}
         <div className="btn-container">
-          <button className="form-submit" type="submit">
+          <button className="form-submit" type="submit" disabled={submitting}>
             Create Category
           </button>
         </div>
