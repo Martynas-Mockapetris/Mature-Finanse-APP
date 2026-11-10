@@ -109,3 +109,9 @@ export const deleteCategory = (id) => {
 
   return { category, deletedTransactionCount: linkedTransactions.length };
 };
+
+// Remove all transactions linked to a category
+export const deleteTransactionsByCategory = (categoryId) => {
+  const remaining = getTransactions().filter((transaction) => transaction.categoryId !== categoryId);
+  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(remaining));
+};

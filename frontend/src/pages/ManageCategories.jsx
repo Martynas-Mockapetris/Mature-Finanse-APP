@@ -1,4 +1,4 @@
-import { getTransactions, deleteCategory } from '../services/storage';
+import { getTransactions, deleteTransactionsByCategory } from '../services/storage';
 import { useCategories } from '../context/CategoriesContext';
 import { Link } from 'react-router-dom';
 import '../styles/CategoryCard.css';
@@ -12,21 +12,21 @@ const categoryGroups = [
 ];
 
 const ManageCategories = () => {
-  const { getCategoriesByType } = useCategories();
+  const { getCategoriesByType, deleteCategory } = useCategories();
   const categories = [...getCategoriesByType('expense'), ...getCategoriesByType('income')];
 
-  const handleDelete = (category) => {
+  const handleDelete = async (category) => {
     const linkedCount = getTransactions().filter((transaction) => transaction.categoryId === category.id).length;
 
     const warning = linkedCount === 0 ? `Delete category "${category.name}"?` : `Deleting "${category.name}" will also permanently delete ${linkedCount} transaction${linkedCount === 1 ? '' : 's'}. Continue?`;
 
     if (!window.confirm(warning)) return;
 
-    const result = deleteCategory(category.id);
-
-    if (!result) {
-      window.alert('This category could not be found.');
-      return;
+    try {
+      await deleteCategory(category.id);
+      deleteTransactionsByCategory(category.id);
+    } catch (err) {
+      window.alert(err.message);
     }
 
     // setCategories((current) => current.filter((item) => item.id !== category.id));

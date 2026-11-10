@@ -42,7 +42,12 @@ export const CategoriesProvider = ({ children }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="form-error">{error}</p>;
 
-  return <CategoriesContext.Provider value={{ addCategory, updateCategory, findCustomCategory, getCategoriesByType, getAvailableCategories, findCategory }}>{children}</CategoriesContext.Provider>;
+  const deleteCategory = async (id) => {
+    await apiRequest(`/categories/${id}`, { method: 'DELETE' });
+    setCustomCategories((current) => current.filter((category) => category.id !== id));
+  };
+
+  return <CategoriesContext.Provider value={{ addCategory, updateCategory, findCustomCategory, getCategoriesByType, getAvailableCategories, findCategory, deleteCategory }}>{children}</CategoriesContext.Provider>;
 };
 
 export const useCategories = () => useContext(CategoriesContext);
