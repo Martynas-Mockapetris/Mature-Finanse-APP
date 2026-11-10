@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const categorySchema = new mongoose.Schema(
+const categorySchema = new Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
       required: true
     },
@@ -24,4 +24,4 @@ const categorySchema = new mongoose.Schema(
 
 categorySchema.index({ userId: 1, type: 1, name: 1 }, { unique: true, collation: { locale: 'en', strength: 2 } });
 
-module.exports = mongoose.model('Category', categorySchema);
+export const Category = model('Category', categorySchema);
