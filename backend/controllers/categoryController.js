@@ -1,5 +1,6 @@
 import { Category } from '../models/Category.js';
 
+// Create a new category
 const createCategory = async (req, res, next) => {
   const { name, type } = req.body ?? {};
 
@@ -34,4 +35,28 @@ const createCategory = async (req, res, next) => {
   }
 };
 
-export { createCategory };
+// Get all categories for the authenticated user
+const getCategories = async (req, res, next) => {
+  const { type } = req.query;
+
+  if (type !== undefined && !['income', 'expense'].includes(type)) {
+    return res.status(400).json({ message: 'Type must be income or expense.' });
+  }
+
+  try {
+    const filter = { userId: req.userId, ...(type && { type }) };
+    const categories = await Category.find(filter).sort({ name: 1 }).collation({ locale: 'en', strength: 2 });
+
+    return res.json(
+      categories.map((category) => ({
+        id: category.id,
+        name: category.name,
+        type: category.type
+      }))
+    );
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { createCategory, getCategories };
