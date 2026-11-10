@@ -1,35 +1,3 @@
-import { defaultExpenseCategories, defaultIncomeCategories } from '../data/defaultCategories';
-
-const CATEGORIES_KEY = 'categories';
-
-// Get all categories from local storage
-export const getCategories = () => {
-  const stored = localStorage.getItem(CATEGORIES_KEY);
-  return stored ? JSON.parse(stored) : [];
-};
-
-// Add a new category to local storage
-export const addCategory = ({ name, type }) => {
-  const categories = getCategories();
-  const newCategory = { id: crypto.randomUUID(), name, type };
-  localStorage.setItem(CATEGORIES_KEY, JSON.stringify([...categories, newCategory]));
-  return newCategory;
-};
-
-// Get categories filtered by type (expense or income)
-export const getCategoriesByType = (type) => getCategories().filter((category) => category.type === type);
-
-// Get default and user-added categories for one type (expense or income)
-export const getAvailableCategories = (type) => {
-  const defaults = type === 'income' ? defaultIncomeCategories : defaultExpenseCategories;
-  return [...defaults, ...getCategoriesByType(type)];
-};
-
-// Find a category by type and ID, including default and user-added categories
-export const findCategory = (type, id) => {
-  return getAvailableCategories(type).find((category) => category.id === id);
-};
-
 // Get and add transactions to local storage
 const TRANSACTIONS_KEY = 'transactions';
 
@@ -72,42 +40,6 @@ export const findTransaction = (id) => getTransactions().find((transaction) => t
 export const updateTransaction = (id, changes) => {
   const updated = getTransactions().map((transaction) => (transaction.id === id ? { ...transaction, ...changes } : transaction));
   localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(updated));
-};
-
-// Find a user-created category by ID
-export const findCustomCategory = (id) => getCategories().find((category) => category.id === id);
-
-// Rename a user-created category by ID
-export const updateCategory = (id, name) => {
-  const categories = getCategories();
-
-  if (!categories.some((category) => category.id === id)) {
-    return null;
-  }
-
-  const updatedCategories = categories.map((category) => (category.id === id ? { ...category, name } : category));
-
-  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(updatedCategories));
-  return updatedCategories.find((category) => category.id === id);
-};
-
-// Delete a custom category and all transactions that use it
-export const deleteCategory = (id) => {
-  const categories = getCategories();
-  const category = categories.find((item) => item.id === id);
-
-  if (!category) {
-    return null;
-  }
-
-  const transactions = getTransactions();
-  const linkedTransactions = transactions.filter((transaction) => transaction.categoryId === id);
-
-  localStorage.setItem(TRANSACTIONS_KEY, JSON.stringify(transactions.filter((transaction) => transaction.categoryId !== id)));
-
-  localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories.filter((item) => item.id !== id)));
-
-  return { category, deletedTransactionCount: linkedTransactions.length };
 };
 
 // Remove all transactions linked to a category
