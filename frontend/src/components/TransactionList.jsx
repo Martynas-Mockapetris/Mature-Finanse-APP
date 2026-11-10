@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { findCategory } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import '../styles/TransactionList.css';
 
 const TransactionList = ({ type, transactions, onDelete }) => {
+  const { findCategory } = useCategories();
   const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
   if (transactions.length === 0) {

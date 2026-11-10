@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAvailableCategories } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import '../styles/FormSection.css';
 
 const TransactionForm = ({ type, initialValues, submitLabel, cancelTo, onSubmit }) => {
@@ -8,6 +8,7 @@ const TransactionForm = ({ type, initialValues, submitLabel, cancelTo, onSubmit 
   const [date, setDate] = useState(initialValues.date);
   const [note, setNote] = useState(initialValues.note);
   const [categoryId, setCategoryId] = useState(initialValues.categoryId);
+  const { getAvailableCategories } = useCategories();
   const categories = getAvailableCategories(type);
 
   const handleSubmit = (e) => {

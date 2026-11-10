@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import CategoryCard from './CategoryCard';
 import { GiPriceTag } from 'react-icons/gi';
-import { getCategoriesByType } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import { defaultIncomeCategories } from '../data/defaultCategories';
 import '../styles/IncExpSection.css';
 
 const IncomeSection = () => {
   const navigate = useNavigate();
+
+  const { getCategoriesByType } = useCategories();
 
   const savedCategories = getCategoriesByType('income').map((category) => ({
     id: category.id,

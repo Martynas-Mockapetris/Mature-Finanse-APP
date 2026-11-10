@@ -1,10 +1,12 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { findCategory, addTransaction } from '../services/storage';
+import { addTransaction } from '../services/storage';
+import { useCategories } from '../context/CategoriesContext';
 import TransactionForm from '../components/TransactionForm';
 
 const AddTransaction = () => {
   const { type, categoryId } = useParams();
+  const { findCategory } = useCategories();
   const category = findCategory(type, categoryId);
 
   const navigate = useNavigate();
