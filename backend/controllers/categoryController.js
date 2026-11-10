@@ -80,11 +80,7 @@ const updateCategory = async (req, res, next) => {
   }
 
   try {
-    const category = await Category.findOneAndUpdate(
-      { _id: id, userId: req.userId },
-      { name: trimmedName },
-      { new: true, runValidators: true }
-    );
+    const category = await Category.findOneAndUpdate({ _id: id, userId: req.userId }, { name: trimmedName }, { new: true, runValidators: true });
 
     if (!category) {
       return res.status(404).json({ message: 'Category not found.' });
@@ -104,4 +100,25 @@ const updateCategory = async (req, res, next) => {
   }
 };
 
-export { createCategory, getCategories, updateCategory };
+// Delete a category by ID
+const deleteCategory = async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!isValidObjectId(id)) {
+    return res.status(404).json({ message: 'Category not found.' });
+  }
+
+  try {
+    const category = await Category.findOneAndDelete({ _id: id, userId: req.userId });
+
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found.' });
+    }
+
+    return res.sendStatus(204);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { createCategory, getCategories, updateCategory, deleteCategory };
