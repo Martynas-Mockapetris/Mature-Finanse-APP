@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+import { hash, compare } from 'bcryptjs';
 
 const hashPassword = async (password) => {
   if (typeof password !== 'string' || password.length === 0) {
@@ -9,7 +9,7 @@ const hashPassword = async (password) => {
     throw new Error('Password must be at most 72 UTF-8 bytes.');
   }
 
-  return bcrypt.hash(password, 12);
+  return hash(password, 12);
 };
 
 const verifyPassword = async (password, passwordHash) => {
@@ -17,7 +17,7 @@ const verifyPassword = async (password, passwordHash) => {
     return false;
   }
 
-  return bcrypt.compare(password, passwordHash);
+  return compare(password, passwordHash);
 };
 
-module.exports = { hashPassword, verifyPassword };
+export { hashPassword, verifyPassword };

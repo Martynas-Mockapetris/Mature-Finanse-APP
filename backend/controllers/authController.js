@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const { hashPassword, verifyPassword } = require('../utils/password');
-const { signToken } = require('../utils/token');
+import { User } from '../models/User.js';
+import { hashPassword, verifyPassword } from '../utils/password.js';
+import { signToken } from '../utils/token.js';
 
 const register = async (req, res, next) => {
   const { email, password } = req.body ?? {};
@@ -62,4 +62,4 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login };
+export { register, login };

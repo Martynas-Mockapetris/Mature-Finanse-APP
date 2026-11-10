@@ -1,4 +1,4 @@
-const { verifyToken } = require('../utils/token');
+import { verifyToken } from '../utils/token.js';
 
 const requireAuth = (req, res, next) => {
   const header = req.headers.authorization ?? '';
@@ -17,4 +17,4 @@ const requireAuth = (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth };
+export { requireAuth };

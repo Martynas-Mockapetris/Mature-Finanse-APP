@@ -1,9 +1,9 @@
-const express = require('express');
-const { register, login } = require('../controllers/authController');
-const { requireAuth } = require('../middleware/requireAuth');
-const User = require('../models/User');
+import { Router } from 'express';
+import { register, login } from '../controllers/authController.js';
+import { requireAuth } from '../middleware/requireAuth.js';
+import { User } from '../models/User.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/register', register);
 router.post('/login', login);
@@ -21,4 +21,4 @@ router.get('/me', requireAuth, async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;

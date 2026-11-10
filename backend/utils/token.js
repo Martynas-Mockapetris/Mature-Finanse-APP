@@ -1,11 +1,13 @@
-const jwt = require('jsonwebtoken');
+import jsonwebtoken from 'jsonwebtoken';
+
+const { sign, verify } = jsonwebtoken;
 
 const signToken = (user) => {
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET is missing from the environment.');
   }
 
-  return jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
+  return sign({ sub: user.id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || '7d'
   });
 };
@@ -15,7 +17,7 @@ const verifyToken = (token) => {
     throw new Error('JWT_SECRET is missing from the environment.');
   }
 
-  return jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+  return verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
 };
 
-module.exports = { signToken, verifyToken };
+export { signToken, verifyToken };
