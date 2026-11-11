@@ -10,3 +10,10 @@ export const createServerTransaction = (values) => {
     body: values
   });
 };
+
+export const updateServerTransaction = (id, changes) => {
+  return apiRequest(`/transactions/${id}`, {
+    method: 'PATCH',
+    body: changes
+  });
+};

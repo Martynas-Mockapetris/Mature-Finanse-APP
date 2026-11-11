@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getServerTransactions, createServerTransaction } from '../services/transactionsApi';
+import { getServerTransactions, createServerTransaction, updateServerTransaction } from '../services/transactionsApi';
 
 const TransactionsContext = createContext(null);
 
@@ -39,6 +41,18 @@ export const TransactionsProvider = ({ children }) => {
     const created = await createServerTransaction(values);
     setTransactions((current) => [...current, created]);
     return created;
+  };
+
+  const updateTransaction = async (id, changes) => {
+    if (loading || error) {
+      throw new Error('Transactions must load before updating one.');
+    }
+
+    const updated = await updateServerTransaction(id, changes);
+    setTransactions((current) =>
+      current.map((transaction) => (transaction.id === id ? updated : transaction))
+    );
+    return updated;
   };
 
   return (
