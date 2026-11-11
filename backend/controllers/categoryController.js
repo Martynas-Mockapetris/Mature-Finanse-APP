@@ -1,5 +1,6 @@
-import { isValidObjectId } from 'mongoose';
+import mongoose, { isValidObjectId } from 'mongoose';
 import { Category } from '../models/Category.js';
+import { Transaction } from '../models/Transaction.js';
 
 // Create a new category
 const createCategory = async (req, res, next) => {
@@ -109,9 +110,28 @@ const deleteCategory = async (req, res, next) => {
   }
 
   try {
-    const category = await Category.findOneAndDelete({ _id: id, userId: req.userId });
+    const deleted = await mongoose.connection.transaction(async (session) => {
+      const category = await Category.findOneAndDelete({ _id: id, userId: req.userId }, { session });
 
-    if (!category) {
+      if (!category) {
+        return false;
+      }
+
+      await Transaction.deleteMany(
+        {
+          userId: req.userId,
+          categoryId: {
+            $regex: `^${category.id}$`,
+            $options: 'i'
+          }
+        },
+        { session }
+      );
+
+      return true;
+    });
+
+    if (!deleted) {
       return res.status(404).json({ message: 'Category not found.' });
     }
 
