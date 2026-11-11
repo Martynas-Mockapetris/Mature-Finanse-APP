@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getServerTransactions } from '../services/transactionsApi';
+import { getServerTransactions, createServerTransaction } from '../services/transactionsApi';
 
 const TransactionsContext = createContext(null);
 
@@ -31,8 +31,18 @@ export const TransactionsProvider = ({ children }) => {
     };
   }, [attempt]);
 
+  const addTransaction = async (values) => {
+    if (loading || error) {
+      throw new Error('Transactions must load before adding a new one.');
+    }
+
+    const created = await createServerTransaction(values);
+    setTransactions((current) => [...current, created]);
+    return created;
+  };
+
   return (
-    <TransactionsContext.Provider value={{ transactions, loading, error }}>
+    <TransactionsContext.Provider value={{ transactions, loading, error, addTransaction }}>
       {error && (
         <div role="alert">
           <p>Could not load transactions: {error}</p>
