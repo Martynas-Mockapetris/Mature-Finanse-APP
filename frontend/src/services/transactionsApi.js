@@ -17,3 +17,9 @@ export const updateServerTransaction = (id, changes) => {
     body: changes
   });
 };
+
+export const deleteServerTransaction = (id) => {
+  return apiRequest(`/transactions/${id}`, {
+    method: 'DELETE'
+  });
+};

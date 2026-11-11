@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getServerTransactions, createServerTransaction, updateServerTransaction } from '../services/transactionsApi';
+import { getServerTransactions, createServerTransaction, updateServerTransaction, deleteServerTransaction } from '../services/transactionsApi';
 
 const TransactionsContext = createContext(null);
 
@@ -49,14 +49,21 @@ export const TransactionsProvider = ({ children }) => {
     }
 
     const updated = await updateServerTransaction(id, changes);
-    setTransactions((current) =>
-      current.map((transaction) => (transaction.id === id ? updated : transaction))
-    );
+    setTransactions((current) => current.map((transaction) => (transaction.id === id ? updated : transaction)));
     return updated;
   };
 
+  const deleteTransaction = async (id) => {
+    if (loading || error) {
+      throw new Error('Transactions must load before deleting one.');
+    }
+
+    await deleteServerTransaction(id);
+    setTransactions((current) => current.filter((transaction) => transaction.id !== id));
+  };
+
   return (
-    <TransactionsContext.Provider value={{ transactions, loading, error, addTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, loading, error, addTransaction, updateTransaction, deleteTransaction }}>
       {error && (
         <div role="alert">
           <p>Could not load transactions: {error}</p>
