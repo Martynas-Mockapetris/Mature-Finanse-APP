@@ -7,16 +7,32 @@ const TransactionForm = ({ type, initialValues, submitLabel, cancelTo, onSubmit 
   const [amount, setAmount] = useState(initialValues.amount);
   const [date, setDate] = useState(initialValues.date);
   const [note, setNote] = useState(initialValues.note);
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const [categoryId, setCategoryId] = useState(initialValues.categoryId);
   const { getAvailableCategories } = useCategories();
   const categories = getAvailableCategories(type);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const value = Number(amount);
-    if (!value || value <= 0 || !date) return;
+    setError('');
 
-    onSubmit({ categoryId, amount: value, date, note: note.trim() });
+    const value = Number(amount);
+
+    if (!Number.isFinite(value) || value <= 0 || !date) {
+      setError('Enter a positive amount and a date.');
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      await onSubmit({ categoryId, amount: value, date, note: note.trim() });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -54,9 +70,14 @@ const TransactionForm = ({ type, initialValues, submitLabel, cancelTo, onSubmit 
         <input id="note" className="form-input" type="text" value={note} onChange={(e) => setNote(e.target.value)} />
       </div>
 
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
       <div className="btn-container">
-        <button className="form-submit" type="submit">
-          {submitLabel}
+        <button className="form-submit" type="submit" disabled={submitting}>
+          {submitting ? 'Saving...' : submitLabel}
         </button>
         <Link to={cancelTo} className="cancel-link">
           <span>Cancel</span>
