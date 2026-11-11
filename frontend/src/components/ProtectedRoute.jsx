@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CategoriesProvider } from '../context/CategoriesContext';
+import { TransactionsProvider } from '../context/TransactionsContext';
 
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
@@ -10,7 +11,9 @@ const ProtectedRoute = () => {
 
   return (
     <CategoriesProvider>
-      <Outlet />
+      <TransactionsProvider key={user.id}>
+        <Outlet />
+      </TransactionsProvider>
     </CategoriesProvider>
   );
 };
