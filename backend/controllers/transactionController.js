@@ -2,11 +2,13 @@ import { isValidObjectId } from 'mongoose';
 import { Category } from '../models/Category.js';
 import { Transaction } from '../models/Transaction.js';
 
+// Default category IDs for income and expense types
 const defaultCategoryIds = {
   expense: ['expense-bills', 'expense-groceries', 'expense-subscriptions', 'expense-entertainment'],
   income: ['income-work', 'income-freelance', 'income-dividends', 'income-stocks']
 };
 
+// Validate date in YYYY-MM-DD format
 const isValidDate = (value) => {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
     return false;
@@ -16,6 +18,7 @@ const isValidDate = (value) => {
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 };
 
+// Create a new transaction for the authenticated user
 const createTransaction = async (req, res, next) => {
   const { type, categoryId, amount, date, note = '' } = req.body ?? {};
 
@@ -80,4 +83,36 @@ const createTransaction = async (req, res, next) => {
   }
 };
 
-export { createTransaction };
+// Get transactions for the authenticated user, optionally filtered by type
+const getTransactions = async (req, res, next) => {
+  const { type } = req.query;
+
+  if (type !== undefined && !['income', 'expense'].includes(type)) {
+    return res.status(400).json({ message: 'Type must be income or expense.' });
+  }
+
+  try {
+    const filter = { userId: req.userId };
+
+    if (type) {
+      filter.type = type;
+    }
+
+    const transactions = await Transaction.find(filter).sort({ date: -1 });
+
+    return res.json(
+      transactions.map((transaction) => ({
+        id: transaction.id,
+        type: transaction.type,
+        categoryId: transaction.categoryId,
+        amount: transaction.amount,
+        date: transaction.date,
+        note: transaction.note
+      }))
+    );
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { createTransaction, getTransactions };
