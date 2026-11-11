@@ -144,10 +144,7 @@ const updateTransaction = async (req, res, next) => {
     return res.status(400).json({ message: 'A category is required.' });
   }
 
-  if (
-    'amount' in changes &&
-    (typeof changes.amount !== 'number' || !Number.isFinite(changes.amount) || changes.amount <= 0)
-  ) {
+  if ('amount' in changes && (typeof changes.amount !== 'number' || !Number.isFinite(changes.amount) || changes.amount <= 0)) {
     return res.status(400).json({ message: 'Amount must be a positive number.' });
   }
 
@@ -166,10 +163,7 @@ const updateTransaction = async (req, res, next) => {
       return res.status(404).json({ message: 'Transaction not found.' });
     }
 
-    if (
-      'categoryId' in changes &&
-      !(await isAllowedCategory(changes.categoryId, transaction.type, req.userId))
-    ) {
+    if ('categoryId' in changes && !(await isAllowedCategory(changes.categoryId, transaction.type, req.userId))) {
       return res.status(400).json({ message: 'Invalid category.' });
     }
 
@@ -192,4 +186,28 @@ const updateTransaction = async (req, res, next) => {
   }
 };
 
-export { createTransaction, getTransactions, updateTransaction };
+// Delete an existing transaction for the authenticated user
+const deleteTransaction = async (req, res, next) => {
+  const { id } = req.params;
+
+  if (!isValidObjectId(id)) {
+    return res.status(404).json({ message: 'Transaction not found.' });
+  }
+
+  try {
+    const transaction = await Transaction.findOneAndDelete({
+      _id: id,
+      userId: req.userId
+    });
+
+    if (!transaction) {
+      return res.status(404).json({ message: 'Transaction not found.' });
+    }
+
+    return res.sendStatus(204);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export { createTransaction, getTransactions, updateTransaction, deleteTransaction };
