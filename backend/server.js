@@ -4,6 +4,7 @@ import connectDatabase from './config/db.js';
 import { User } from './models/User.js';
 import { Category } from './models/Category.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import transactionRoutes from './routes/transactionRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import cors from 'cors';
 
@@ -12,6 +13,7 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN }));
 app.use(json());
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/transactions', transactionRoutes);
 const port = Number(process.env.PORT);
 
 if (!Number.isInteger(port) || port < 1 || port > 65535) {
