@@ -1,14 +1,18 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import TransactionForm from '../components/TransactionForm';
-import { findTransaction, updateTransaction } from '../services/storage';
+import { useTransactions } from '../context/TransactionsContext';
 import { useCategories } from '../context/CategoriesContext';
 
 const EditTransaction = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const transaction = findTransaction(id);
+  const { transactions, loading, error, updateTransaction } = useTransactions();
+  const transaction = transactions.find((item) => item.id === id);
   const { findCategory } = useCategories();
+
+  if (loading) return <p>Loading transactions...</p>;
+  if (error) return <p>Transactions could not be loaded.</p>;
 
   if (!transaction) {
     return (
@@ -25,9 +29,9 @@ const EditTransaction = () => {
   const listPath = transaction.type === 'income' ? '/income' : '/expenses';
   const categoryName = findCategory(transaction.type, transaction.categoryId)?.name ?? 'Unknown category';
 
-  const handleSubmit = (values) => {
-    updateTransaction(id, values);
-    navigate(listPath);
+  const handleSubmit = async (values) => {
+    await updateTransaction(id, values);
+    navigate('/history');
   };
 
   return (
