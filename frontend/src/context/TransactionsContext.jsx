@@ -62,8 +62,12 @@ export const TransactionsProvider = ({ children }) => {
     setTransactions((current) => current.filter((transaction) => transaction.id !== id));
   };
 
+  const removeTransactionsByCategory = (categoryId) => {
+    setTransactions((current) => current.filter((transaction) => transaction.categoryId.toLowerCase() !== categoryId.toLowerCase()));
+  };
+
   return (
-    <TransactionsContext.Provider value={{ transactions, loading, error, addTransaction, updateTransaction, deleteTransaction }}>
+    <TransactionsContext.Provider value={{ transactions, loading, error, addTransaction, updateTransaction, deleteTransaction, removeTransactionsByCategory }}>
       {error && (
         <div role="alert">
           <p>Could not load transactions: {error}</p>

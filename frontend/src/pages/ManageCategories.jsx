@@ -1,4 +1,4 @@
-import { getTransactions, deleteTransactionsByCategory } from '../services/storage';
+import { useTransactions } from '../context/TransactionsContext';
 import { useCategories } from '../context/CategoriesContext';
 import { Link } from 'react-router-dom';
 import '../styles/CategoryCard.css';
@@ -13,10 +13,16 @@ const categoryGroups = [
 
 const ManageCategories = () => {
   const { getCategoriesByType, deleteCategory } = useCategories();
+  const { transactions, loading, error, removeTransactionsByCategory } = useTransactions();
   const categories = [...getCategoriesByType('expense'), ...getCategoriesByType('income')];
 
   const handleDelete = async (category) => {
-    const linkedCount = getTransactions().filter((transaction) => transaction.categoryId === category.id).length;
+    if (loading || error) {
+      window.alert('Transactions must load before deleting a category.');
+      return;
+    }
+
+    const linkedCount = transactions.filter((transaction) => transaction.categoryId.toLowerCase() === category.id.toLowerCase()).length;
 
     const warning = linkedCount === 0 ? `Delete category "${category.name}"?` : `Deleting "${category.name}" will also permanently delete ${linkedCount} transaction${linkedCount === 1 ? '' : 's'}. Continue?`;
 
@@ -24,12 +30,10 @@ const ManageCategories = () => {
 
     try {
       await deleteCategory(category.id);
-      deleteTransactionsByCategory(category.id);
+      removeTransactionsByCategory(category.id);
     } catch (err) {
-      window.alert(err.message);
+      window.alert(`Could not delete category: ${err.message}`);
     }
-
-    // setCategories((current) => current.filter((item) => item.id !== category.id));
   };
 
   return (
