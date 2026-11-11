@@ -3,7 +3,7 @@ import { useCategories } from '../context/CategoriesContext';
 import { FaTrash, FaPen } from 'react-icons/fa';
 import '../styles/TransactionList.css';
 
-const TransactionList = ({ type, transactions, onDelete, readOnly = false }) => {
+const TransactionList = ({ type, transactions, onDelete, readOnly = false, showEdit = true }) => {
   const { findCategory } = useCategories();
   const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
@@ -28,9 +28,11 @@ const TransactionList = ({ type, transactions, onDelete, readOnly = false }) => 
           <span className="transaction-amount">{transaction.amount.toFixed(2)}</span>
           {!readOnly && (
             <div className="transaction-actions">
-              <Link to={`/transactions/${transaction.id}/edit`} className="transaction-edit" aria-label="Edit transaction" title="Edit">
-                <FaPen />
-              </Link>
+              {showEdit && (
+                <Link to={`/transactions/${transaction.id}/edit`} className="transaction-edit" aria-label="Edit transaction" title="Edit">
+                  <FaPen />
+                </Link>
+              )}
               <button className="transaction-delete" onClick={() => onDelete(transaction.id)} aria-label="Delete transaction" title="Delete">
                 <FaTrash />
               </button>
