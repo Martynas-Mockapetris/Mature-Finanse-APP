@@ -1,21 +1,16 @@
-import { useState } from 'react';
 import TransactionList from '../components/TransactionList';
-import { deleteTransaction, getTransactions } from '../services/storage';
+import { useTransactions } from '../context/TransactionsContext';
 
 const History = () => {
-  const [transactions, setTransactions] = useState(() => getTransactions());
-
-  const handleDelete = (id) => {
-    if (!window.confirm('Delete this transaction?')) return;
-
-    deleteTransaction(id);
-    setTransactions(getTransactions());
-  };
+  const { transactions, loading, error } = useTransactions();
 
   return (
     <section className="section">
       <h2 className="section-title-main">History</h2>
-      <TransactionList type="all" transactions={transactions} onDelete={handleDelete} />
+
+      {loading && <p>Loading transactions...</p>}
+      {error && <p>Transactions could not be loaded.</p>}
+      {!loading && !error && <TransactionList type="all" transactions={transactions} readOnly />}
     </section>
   );
 };

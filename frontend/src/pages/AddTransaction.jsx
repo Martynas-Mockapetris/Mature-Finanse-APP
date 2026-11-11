@@ -1,18 +1,19 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { addTransaction } from '../services/storage';
+import { useTransactions } from '../context/TransactionsContext';
 import { useCategories } from '../context/CategoriesContext';
 import TransactionForm from '../components/TransactionForm';
 
 const AddTransaction = () => {
   const { type, categoryId } = useParams();
   const { findCategory } = useCategories();
+  const { addTransaction } = useTransactions();
   const category = findCategory(type, categoryId);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (values) => {
-    addTransaction({ type, categoryId, ...values });
+  const handleSubmit = async (values) => {
+    await addTransaction({ type, ...values });
     navigate('/');
   };
 
