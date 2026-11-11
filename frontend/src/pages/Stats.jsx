@@ -1,11 +1,21 @@
-import { getTotalByType, getTransactions } from '../services/storage';
+import { useTransactions } from '../context/TransactionsContext';
 import '../styles/Stats.css';
 
 const Stats = () => {
+  const { transactions, loading, error } = useTransactions();
+
+  if (loading) return <p>Loading transactions...</p>;
+  if (error) return <p>Transactions could not be loaded.</p>;
+
+  const getTotalByType = (type) => {
+    const total = transactions.filter((transaction) => transaction.type === type).reduce((sum, transaction) => sum + transaction.amount, 0);
+
+    return Math.round(total * 100) / 100;
+  };
+
   const income = getTotalByType('income');
   const expenses = getTotalByType('expense');
   const balance = Math.round((income - expenses) * 100) / 100;
-  const transactions = getTransactions();
 
   const incomeCount = transactions.filter((transaction) => transaction.type === 'income').length;
 
